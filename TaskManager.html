@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Task Manager">
+        <div class="slds-p-around_medium">
+            <lightning-record-edit-form object-api-name="Task__c">
+                <lightning-input-field field-name="Name" label="Task Name" required></lightning-input-field>
+                <lightning-textarea field-name="Description__c" label="Description" required></lightning-textarea>
+                <lightning-input-field field-name="Due_Date__c" label="Due Date" type="date" required></lightning-input-field>
+                <lightning-combobox field-name="Priority__c" label="Priority" value={priority} options={priorityOptions}></lightning-combobox>
+                <lightning-button variant="brand" type="submit" label="Create Task" onclick={handleCreateTask}></lightning-button>
+            </lightning-record-edit-form>
+        </div>
+
+        <template if:true={tasks}>
+            <lightning-datatable
+                data={tasks}
+                columns={columns}
+                key-field="Id"
+                onrowaction={handleRowAction}
+            ></lightning-datatable>
+        </template>
+    </lightning-card>
+</template>
